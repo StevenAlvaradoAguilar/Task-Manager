@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :api do
+    # get 'features/index'
+    # get 'features/show'
+    get 'features/create_comment'
+    resources :features, only: [:index, :show] do
+      post 'create_comment', on: :member
+    end
+
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -8,3 +17,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
+
+# GET /api/features: Lista todas las características.
+# GET /api/features/:id: Muestra una característica específica.
+# POST /api/features/:id/create_comment: Crea un comentario para una característica específica.
