@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << "https://task-manager-production-e8c3.up.railway.app/"
+  config.hosts << "task-manager-production-e8c3.up.railway.app"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
