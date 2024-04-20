@@ -89,11 +89,7 @@ test:
 #
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: <%= ENV["PRODUCTION_POSTGRES_DB"] %>
-  username: <%= ENV["PRODUCTION_POSTGRES_USER"] %>
-  password: <%= ENV["PRODUCTION_POSTGRES_PASSWORD"] %>
-  host: localhost
-  port: 5432
+  url: <%= ENV["DATABASE_URL"] %>
+  database: railwayapp_production
+  username: railwayapp
+  password: <%= ENV["RAILWAYAPP_DATABASE_PASSWORD"] %>
