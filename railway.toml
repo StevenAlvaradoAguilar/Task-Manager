@@ -22,6 +22,7 @@ description = "Generate migration for comments table"
 
 # Comando para ejecutar "fetch_sismic_data" que hace la carga de los datos de la url
 [[scripts.setup.commands]]
-command = "rails fetch_sismic_data:execute"
+command = "rails g task fetch_sismic_data:execute"
 # Describe el comando
 description = "Fetch sismic data and store it in the database"
+
