@@ -20,12 +20,9 @@ command = "rails generate migration CreateComments body:text feature:references"
 # Descripción del comando
 description = "Generate migration for comments table"
 
-[commands]
-# Definimos el comando "fetch_sismic_data"
+# Comando para ejecutar "fetch_sismic_data" que hace la carga de los datos de la url
+[[scripts.setup.commands]]
 [commands.fetch_sismic_data]
-# Usamos el script de comando "rails" para ejecutar el comando de rake
-script = "rails"
-# Definir los argumentos del comando "rails"
-args = ["fetch_sismic_data:execute"]
+command = "fetch_sismic_data:execute"
 # Describe el comando
 description = "Fetch sismic data and store it in the database"
