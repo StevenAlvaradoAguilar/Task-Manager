@@ -16,8 +16,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: localhost
-  username: postgres
-  password: 30501202
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   port: 5432
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -25,7 +25,13 @@ default: &default
 
 development:
   <<: *default
-  database: task_manager_development
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV["PRODUCTION_POSTGRES_USER"] %>
+  password: <%= ENV["PRODUCTION_POSTGRES_PASSWORD"] %>
+  host: localhost
+  port: 5432
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -83,6 +89,11 @@ test:
 #
 production:
   <<: *default
-  database: task_manager_production
-  username: task_manager
-  password: <%= ENV["TASK_MANAGER_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV["PRODUCTION_POSTGRES_DB"] %>
+  username: <%= ENV["PRODUCTION_POSTGRES_USER"] %>
+  password: <%= ENV["PRODUCTION_POSTGRES_PASSWORD"] %>
+  host: localhost
+  port: 5432

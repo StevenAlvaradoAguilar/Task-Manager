@@ -2,6 +2,10 @@ require_relative "boot"
 
 require "rails/all"
 
+#require "dotenv/load"
+
+#Dotenv::Rails.load
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -28,5 +32,9 @@ module TaskManager
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.before_configuration do
+      ENV['BACKEND_PORT'] ||= '4001'
+    end
   end
 end

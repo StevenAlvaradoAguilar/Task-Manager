@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
   namespace :api do
-    # get 'features/index'
-    # get 'features/show'
-    get 'features/create_comment'
+    # Ruta para listar todas las características con paginación
+    get '/features', to: 'features#index'
+    # Ruta para mostrar una característica específica
+    get '/features/:id', to: 'features#show'
+    # Ruta para crear un comentario para una característica específica
+    post '/api/features/:id/create_comment', to: 'features#create_comment', as: 'create_comment'
+    # get '/static/js/bundle.js', to: 'application#bundle'
+    get "/main.00917910f12e074c60f6.hot-update.js", to: redirect("/404")
     resources :features, only: [:index, :show] do
+      post '/api/features/:id/comments', to: 'comments#create', as: 'create_comment'
+      resources :comments, only: [:index]
+    end
+    resources :features, only: [] do
       post 'create_comment', on: :member
     end
-
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -7,14 +7,15 @@ class Api::FeaturesController < ApplicationController
     per_page = params[:per_page]&.to_i || 25
 
     # Obtener los parámetros de consulta
-    mag_types = params[:filters]&.dig(:mag_type) || []
+    mag_types = params[:mag_types].split(",") if params[:mag_types]
+
+    # Filtrar por mag_type si mag_types está presente
+    features = mag_types.present? ? Feature.where(mag_type: mag_types) : Feature.all
 
     # Filtrar por mag_type
     features = Feature.where(mag_type: mag_types)
 
-    # Paginar los resultados
-    #features = features.offset((page - 1) * per_page).limit(per_page)
-
+    # Paginar los resultados después de filtrar por mag_type
     features = Feature.paginate(page: page, per_page: per_page)
 
     @features = features.map do |feature|
@@ -40,13 +41,17 @@ class Api::FeaturesController < ApplicationController
       }
     end
 
+    # Definir los diferentes tipos de magnitud predefinidos
+    different_mag_types = Feature.distinct.pluck(:mag_type)
+
     render json: {
       data: @features,
       pagination: {
         current_page: features.current_page,
         total: features.total_entries,
         per_page: features.per_page
-      }
+      },
+      mag_types: different_mag_types
     }
   end
 
