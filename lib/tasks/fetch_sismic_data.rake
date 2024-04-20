@@ -1,4 +1,5 @@
 # lib/tasks/fetch_sismic_data.rake
+
 require 'open-uri'
 
 namespace :fetch_sismic_data do
