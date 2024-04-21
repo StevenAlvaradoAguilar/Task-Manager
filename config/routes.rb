@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     resources :features, only: [] do
       post 'create_comment', on: :member
     end
+    # we generate two routes for messages (index and create).
+    # We also generate a route to use as our websocket server endpoint.
+    # This is what we’ll use to “listen” for updates on the frontend.
+    resources :messages, only: [:index, :create]
+    mount ActionCable.server => '/cable'
   end
 
   # Ruta raíz de la aplicación
