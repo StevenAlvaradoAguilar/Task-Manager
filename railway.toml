@@ -2,6 +2,12 @@
 # Este script se ejecutará al configurar el entorno en Railway.
 # Puedes incluir aquí cualquier comando que necesites ejecutar durante la configuración.
 
+# Comando para ejecutar "fetch_sismic_data" que hace la carga de los datos de la url
+[[scripts.setup.commands]]
+command = "rails g model Feature external_id:string magnitude:decimal place:string time:datetime url:string tsunami:boolean mag_type:string title:string longitude:decimal latitude:decimal"
+# Describe el comando
+description = "Fetch sismic data and store it in the database"
+
 # Comando para generar migración de la tabla "tasks"
 [[scripts.setup.commands]]
 command = "rails generate migration CreateTasks name:string description:text"
@@ -20,8 +26,15 @@ command = "rails generate migration CreateComments body:text feature:references"
 # Descripción del comando
 description = "Generate migration for comments table"
 
-# Comando para ejecutar "fetch_sismic_data" que hace la carga de los datos de la url
+# Comando para ejecutar la tarea para obtener y persistir los datos
 [[scripts.setup.commands]]
 command = "rails fetch_sismic_data:execute"
-# Describe el comando
-description = "Fetch sismic data and store it in the database"
+# Descripción del comando
+description = "Generate migration for comments table"
+
+# Comando para ejecutar las migraciones para crear la tabla en la base de datos
+[[scripts.setup.commands]]
+command = "rails db:migrate"
+# Descripción del comando
+description = "Generate migration in the database"
+
