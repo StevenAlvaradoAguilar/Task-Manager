@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   # Ruta raíz de la aplicación
-  root 'features#index'
+  root 'api/features#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
