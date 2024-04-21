@@ -16,8 +16,10 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: localhost
+  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV["PGDATABASE"] %>
   username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  password: <%= ENV["PGPASSWORD"] %>
   port: 5432
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
