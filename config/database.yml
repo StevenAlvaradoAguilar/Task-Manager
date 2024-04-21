@@ -15,12 +15,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: <%= ENV["PGHOST"] %>
   url: <%= ENV["DATABASE_URL"] %>
   database: <%= ENV["PGDATABASE"] %>
   username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["PGPASSWORD"] %>
-  port: 5432
+  port: <%= ENV["PGPORT"] %>
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -91,9 +91,11 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_PRIVATE_URL"] %>
+  adapter: postgresql
+  encoding: unicode
+  url: <%= ENV["DATABASE_URL"] %>
   database: <%= ENV["PGDATABASE"] %>
-  username: <%= ENV["PGUSER"] %>
+  username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["PGPASSWORD"] %>
   host: <%= ENV["PGHOST"] %>
   port: <%= ENV["PGPORT"] %>
